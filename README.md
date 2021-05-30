@@ -1,24 +1,57 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+|   column   |  type  |   options  |
+| ---------- | ------ | ---------- |
+|  nickname  | string | null:false |
+|    email   | string | null:false |
+|  password  | string | null:false |
+| last_name  | string | null:false |
+| first_name | string | null:false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_many :buy_records
 
-* Configuration
+## itemsテーブル
 
-* Database creation
+|  column |     type   |      options     |
+| ------- | ---------- | ---------------- |
+|   name  |    string  |    null:false    |
+|   text  |    text    |    null:false    |
+|  price  |   integer  |    null:false    |
+| user_id | references | foreign_key:true |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to :user
+- has_one :buy_record
 
-* Services (job queues, cache servers, search engines, etc.)
+## buy_recordsテーブル
 
-* Deployment instructions
+|  column |    type    |     options      |
+| ------- | ---------- | ---------------- |
+| user_id | references | foreign_key:true |
+| item_id | references | foreign_key:true |
 
-* ...
+### Association
+
+- belongs_to :user
+- belongs_to :user
+- has_one :delivery
+
+## deliveryテーブル
+
+|     column     |   type  |   options  |
+| -------------- | ------- | ---------- |
+|    post_name   | integer | null:false |
+|      city      |  string | null:false |
+| address_number | integer | null:false |
+|  building_name |  string | null:false |
+|  phone_number  | integer | null:false |
+
+### Association
+
+- belongs_to :buy_records

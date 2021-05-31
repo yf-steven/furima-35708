@@ -1,24 +1,68 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+|        column        |   type  |         options         |
+| -------------------- | ------- | ----------------------- |
+|       nickname       |  string |       null:false        |
+|         email        |  string | null:false, unique:true |
+|  encrypted_password  |  string |       null:false        |
+|      last_name       |  string |       null:false        |
+|      first_name      |  string |       null:false        |
+|    last_name_kana    |  string |       null:false        |
+|   first_name_kana    |  string |       null:false        |
+|        birthday      |   date  |       null:false        |
 
-* Ruby version
 
-* System dependencies
+### Association
 
-* Configuration
+- has_many :items
+- has_many :buy_records
 
-* Database creation
+## itemsテーブル
 
-* Database initialization
+|      column      |     type   |      options     |
+| ---------------- | ---------- | ---------------- |
+|       name       |    string  |    null:false    |
+|       text       |    text    |    null:false    |
+|    category_id   |   integer  |    null:false    |
+|     status_id    |   integer  |    null:false    |
+|    cost_who_id   |   integer  |    null:false    |
+|   post_from_id   |   integer  |    null:false    |
+|  days_to_post_id |   integer  |    null:false    |
+|       price      |   integer  |    null:false    |
+|        user      | references | foreign_key:true |
 
-* How to run the test suite
+### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :user
+- has_one :buy_record
 
-* Deployment instructions
+## buy_recordsテーブル
 
-* ...
+|  column |    type    |     options      |
+| ------- | ---------- | ---------------- |
+|   user  | references | foreign_key:true |
+|   item  | references | foreign_key:true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
+- has_one :delivery
+
+## deliveriesテーブル
+
+|     column     |    type    |     options      |
+| -------------- | ---------- | ---------------- |
+|   post_number  |   string   |    null:false    |
+|  prefecture_id |  integer   |    null:false    |
+|      city      |   string   |    null:false    |
+| address_number |   string   |    null:false    |
+|  building_name |   string   |                  |
+|  phone_number  |   string   |    null:false    |
+|   buy_record   | references | foreign_key:true |
+
+### Association
+
+- belongs_to :buy_record

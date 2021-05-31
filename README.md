@@ -11,9 +11,8 @@
 |      first_name      |  string |       null:false        |
 |    last_name_kana    |  string |       null:false        |
 |   first_name_kana    |  string |       null:false        |
-|      birth_year      | integer |       null:false        |
-|      birth_month     | integer |       null:false        |
-|      birth_day       | integer |       null:false        |
+|        birthday      |   date  |       null:false        |
+
 
 ### Association
 
@@ -22,17 +21,17 @@
 
 ## itemsテーブル
 
-|     column    |     type   |      options     |
-| ------------- | ---------- | ---------------- |
-|      name     |    string  |    null:false    |
-|      text     |    text    |    null:false    |
-|    category   |   integer  |    null:false    |
-|     status    |   integer  |    null:false    |
-|    cost_who   |   integer  |    null:false    |
-|   post_from   |   integer  |    null:false    |
-|  days_to_post |   integer  |    null:false    |
-|     price     |   integer  |    null:false    |
-|      user     | references | foreign_key:true |
+|      column      |     type   |      options     |
+| ---------------- | ---------- | ---------------- |
+|       name       |    string  |    null:false    |
+|       text       |    text    |    null:false    |
+|    category_id   |   integer  |    null:false    |
+|     status_id    |   integer  |    null:false    |
+|    cost_who_id   |   integer  |    null:false    |
+|   post_from_id   |   integer  |    null:false    |
+|  days_to_post_id |   integer  |    null:false    |
+|       price      |   integer  |    null:false    |
+|        user      | references | foreign_key:true |
 
 ### Association
 
@@ -57,6 +56,7 @@
 |     column     |   type  |   options  |
 | -------------- | ------- | ---------- |
 |   post_number  |  string | null:false |
+|  prefecture_id | integer | null:false |
 |      city      |  string | null:false |
 | address_number |  string | null:false |
 |  building_name |  string | null:false |

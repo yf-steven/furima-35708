@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  root to: 'markets#index'
+  root to: 'items#index'
   resources :markets, only: [:index]
 end

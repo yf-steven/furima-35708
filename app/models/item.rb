@@ -7,7 +7,8 @@ class Item < ApplicationRecord
     validates :cost_who_id
     validates :post_from_id
     validates :days_to_post_id
+    validates :price, format: { with: /\A[0-9]+\z/ }
   end
-  validates :price, numericarity: {only_integer: true}
   belongs_to :user
+  has_one_attached :image
 end

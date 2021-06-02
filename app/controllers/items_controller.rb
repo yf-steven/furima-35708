@@ -9,6 +9,10 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
+  def create
+    Item.create(item_params)
+  end
+
   private
 
   def basic_auth
@@ -21,5 +25,9 @@ class ItemsController < ApplicationController
     unless user_signed_in?
       redirect_to new_user_session_path
     end
+  end
+
+  def item_params
+    params.require(:item).permit(:name, :text, :category_id, :status_id, :cost_who_id, :post_from_id, :days_to_post_id, :price, :image).merge(user_id: current_user_id)
   end
 end

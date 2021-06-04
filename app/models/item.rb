@@ -1,13 +1,14 @@
 class Item < ApplicationRecord
   with_options presence: true do
-    validates :name, length: { maximum: 40 }
-    validates :text, length: { maximum: 1000 }
+    validates :image
+    validates :name
+    validates :text
     validates :category_id, numericality: { other_than: 1 }
     validates :status_id, numericality: { other_than: 1 }
     validates :cost_who_id, numericality: { other_than: 1 }
     validates :post_from_id, numericality: { other_than: 1 }
     validates :days_to_post_id, numericality: { other_than: 1 }
-    validates :price, format: { with: /\A[0-9]+\z/ }
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}, format: { with: /\A[0-9]+\z/, message: 'is invalid. Input half-width characters' }
   end
 
   belongs_to :user

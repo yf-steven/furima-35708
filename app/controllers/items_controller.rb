@@ -21,6 +21,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @buy_record = BuyRecord.new
   end
 
   def destroy

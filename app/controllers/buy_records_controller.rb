@@ -1,5 +1,7 @@
 class BuyRecordsController < ApplicationController
-  before_action :item_find, only:[:index, :create]
+  before_action :authenticate_user!,only:[:index, :create]
+  before_action :item_find, only: [:index, :create]
+  before_action :move_to_index, only: [:index, :create] 
 
   def index
     @buy_record_delivery = BuyRecordDelivery.new
@@ -17,8 +19,12 @@ class BuyRecordsController < ApplicationController
 
   private
 
-  def find_item
+  def item_find
     @item = Item.find(params[:item_id])
+  end
+
+  def move_to_index
+    redirect_to root_path if @item.user.id == current_user.id
   end
 
   def buy_record_params

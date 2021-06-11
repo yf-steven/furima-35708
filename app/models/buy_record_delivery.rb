@@ -9,7 +9,7 @@ class BuyRecordDelivery
     validates :post_number, format: {with: /\A[0-9]{3}-[0-9]{4}\z/}
     validates :city
     validates :address_number
-    validates :phone_number, format: {with: /\A[0-9]+\Z/}
+    validates :phone_number, format: {with: /\A[0-9]+\Z/}, length: {maximum: 11}
     validates :token
   end
   validates :prefecture_id, numericality: {other_than: 1}

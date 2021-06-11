@@ -75,6 +75,11 @@ RSpec.describe BuyRecordDelivery, type: :model do
         @buy_record_delivery.valid?
         expect(@buy_record_delivery.errors.full_messages).to include('Phone number is invalid')
       end
+      it 'phone_numberが12文字だと購入できない' do
+        @buy_record_delivery.phone_number = '123456789123'
+        @buy_record_delivery.valid?
+        expect(@buy_record_delivery.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
+      end
       it 'prefecture_idが1だと購入できない' do
         @buy_record_delivery.prefecture_id = 1
         @buy_record_delivery.valid?

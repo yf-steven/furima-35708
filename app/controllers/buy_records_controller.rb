@@ -22,11 +22,10 @@ class BuyRecordsController < ApplicationController
 
   def item_record_find
     @item = Item.find(params[:item_id])
-    @buy_record = BuyRecord.find_by(item_id: @item.id)
   end
 
   def move_to_index
-    if @item.user.id == current_user.id || @buy_record.present?
+    if @item.user.id == current_user.id || @item.buy_record.present?
       redirect_to root_path 
     end
   end

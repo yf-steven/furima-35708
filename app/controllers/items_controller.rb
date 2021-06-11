@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :item_record_find, only: [:show, :destroy, :edit, :update]
+  before_action :item_find, only: [:show, :destroy, :edit, :update]
   before_action :move_to_index, only: [:destroy, :edit, :update]
 
   def index
@@ -22,7 +22,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @buy_record = BuyRecord.new
   end
 
   def destroy
@@ -43,9 +42,8 @@ class ItemsController < ApplicationController
 
   private
 
-  def item_record_find
+  def item_find
     @item = Item.find(params[:id])
-    @buy_records = BuyRecord.find_by(item_id: @item.id)
   end
 
   def item_params
@@ -54,8 +52,7 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-
-    if current_user.id != @item.user.id || @buy_records.present?
+    if current_user.id != @item.user.id || @item.buy_record.present?
       redirect_to root_path
     end 
   end

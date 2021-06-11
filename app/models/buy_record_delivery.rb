@@ -1,7 +1,7 @@
 class BuyRecordDelivery
 
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :post_number, :prefecture_id, :city, :address_number, :building_name, :phone_number, :buy_record_id, :token
+  attr_accessor :user_id, :item_id, :post_number, :prefecture_id, :city, :address_number, :building_name, :phone_number,  :token
 
   with_options presence: true do
     validates :user_id

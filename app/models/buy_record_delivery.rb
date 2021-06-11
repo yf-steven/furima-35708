@@ -1,7 +1,7 @@
 class BuyRecordDelivery
 
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :post_number, :prefecture_id, :city, :address_number, :building_name, :phone_number, :buy_record_id
+  attr_accessor :user_id, :item_id, :post_number, :prefecture_id, :city, :address_number, :building_name, :phone_number, :buy_record_id, :token
 
   with_options presence: true do
     validates :user_id
@@ -10,6 +10,7 @@ class BuyRecordDelivery
     validates :city
     validates :address_number
     validates :phone_number, format: {with: /\A[0-9]+\Z/}
+    validates :token
   end
   validates :prefecture_id, numericality: {other_than: 1}
 

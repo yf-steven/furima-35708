@@ -90,6 +90,11 @@ RSpec.describe BuyRecordDelivery, type: :model do
         @buy_record_delivery.valid?
         expect(@buy_record_delivery.errors.full_messages).to include("Item can't be blank")
       end
+      it 'tokenが空だと登録できない' do
+        @buy_record_delivery.token = nil
+        @buy_record_delivery.valid?
+        expect(@buy_record_delivery.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end

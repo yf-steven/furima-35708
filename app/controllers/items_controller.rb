@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.includes(:user).order(created_at: 'DESC')
+    @buy_records = BuyRecord.includes(:user, :item)
   end
 
   def new
@@ -51,6 +52,8 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    redirect_to root_path unless current_user.id == @item.user.id
+    if current_user.id != @item.user.id || @item.buy_record.present?
+      redirect_to root_path
+    end 
   end
 end
